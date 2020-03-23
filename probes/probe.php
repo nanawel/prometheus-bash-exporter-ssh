@@ -1,4 +1,10 @@
-<?php
+ <?php
+/* NOTICE: The extra space at the beginning of the file is here on purpose and
+ *         is necessary on PHP 7.2 (?) to prevent the first bracket from being
+ *         stripped when the file is interpreted by the PHP processor after
+ *         piping through SSH (exact cause still unknown, maybe a wrong BOM
+ *         processing by PHP).
+ */
 
 //** @see https://stackoverflow.com/a/43056278 */
 ini_set('serialize_precision', -1);
