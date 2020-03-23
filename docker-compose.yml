@@ -1,0 +1,14 @@
+
+version: '3.2'
+
+services:
+  app:
+    image: nanawel/bash-exporter:2.0.0-1
+    command: "./bash-exporter -labels hostname,env,probe -interval 60"
+    ports:
+      - '9300:9300'
+    volumes:
+      - "./scripts:/scripts:ro"
+      - "./probes:/probes:ro"
+      - "./conf:/conf:ro"
+      - "${RSA_PRIVATE_KEY:-~/.ssh/id_rsa}:/root/.ssh/id_rsa:ro"
