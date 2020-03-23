@@ -7,7 +7,7 @@ function extractMeminfo(array $meminfo) {
             continue;
         }
         list($label, $value) = array_slice(preg_split('/\s+/', $line), 0, 2);
-        $results[trim($label, ':')] = $value;
+        $results[trim($label, ':')] = (int) $value;
     }
 
     return $results;

@@ -3,7 +3,7 @@ version: '3.2'
 
 services:
   app:
-    image: nanawel/bash-exporter:2.0.0-1
+    image: nanawel/bash-exporter:2.0.0-2
     command: "./bash-exporter -labels hostname,env,probe -interval 60"
     ports:
       - '9300:9300'
