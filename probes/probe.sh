@@ -19,4 +19,4 @@ cat ${rootDir}/probes/probe.php $probeScript \
     | ssh -C \
         -o StrictHostKeyChecking=no \
         -o LogLevel=ERROR \
-        ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22} PROBE_HOSTNAME="${SSH_HOST}" PROBE_ENV="${SSH_HOST}" PROBE_NAME=${probe} php -f /dev/stdin
+        ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22} PROBE_HOSTNAME="${SSH_HOST}" PROBE_ENV="${env}" PROBE_NAME=${probe} php -f /dev/stdin
