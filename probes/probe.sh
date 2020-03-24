@@ -20,3 +20,6 @@ cat ${rootDir}/probes/probe.php $probeScript \
         -o StrictHostKeyChecking=no \
         -o LogLevel=ERROR \
         ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22} PROBE_HOSTNAME="${SSH_HOST}" PROBE_ENV="${env}" PROBE_NAME=${probe} php -f /dev/stdin
+
+# Force exit 0 to prevent container from exiting in case probe experienced a temporary failure
+exit 0
