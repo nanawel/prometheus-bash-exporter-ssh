@@ -16,8 +16,9 @@ probeConf=$([ -f "$rootDir/conf/${env}_${probe}.conf" ] && echo "$rootDir/conf/$
 # Run!
 cat ${rootDir}/probes/probe.php $probeScript \
     | ssh -C \
-        -o StrictHostKeyChecking=no \
         -o LogLevel=ERROR \
+        -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECKING:-no} \
+        -o ConnectTimeout=${SSH_CONNECT_TIMEOUT:-5} \
         ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22} PROBE_HOSTNAME="${SSH_HOST}" PROBE_ENV="${env}" PROBE_NAME=${probe} php -f /dev/stdin
 
 # Force exit 0 to prevent container from exiting in case probe experienced a temporary failure
