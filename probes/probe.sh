@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 rootDir="$(readlink -f "$(dirname "$0")/..")"
 
 calledScript="$(basename -s '.sh' "$0")"
@@ -12,7 +11,7 @@ probeScript=$([ -f "$rootDir/probes/${probe}.php" ] && echo "$rootDir/probes/${p
 # Not used atm
 probeConf=$([ -f "$rootDir/conf/${env}_${probe}.conf" ] && echo "$rootDir/conf/${env}_${probe}.conf" || echo "")
 
-[ -r "$envFile" ] && source "$envFile" || { echo "Missing env file."; exit 1; }
+[ -r "$envFile" ] && source "$envFile" || { echo "Missing env file '$envFile'."; exit 1; }
 
 # Run!
 cat ${rootDir}/probes/probe.php $probeScript \
