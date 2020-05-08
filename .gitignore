@@ -1,3 +1,5 @@
 .env
+conf/*.conf
 conf/*.env
 scripts/*.sh
+tmp/

@@ -23,13 +23,24 @@ class Probe
         $this->probe = getenv('PROBE_NAME');
     }
 
-    public function sendResults($results) {
+    /**
+     * @return string
+     */
+    public function getConfig()
+    {
+        return file_get_contents('php://stdin') ?: '';
+    }
+
+    public function sendResults($results, array $additionalLabels = []) {
         echo json_encode([
-            'labels' => [
-                'hostname' => $this->host,
-                'env' => $this->env,
-                'probe' => $this->probe
-            ],
+            'labels' => array_merge(
+                [
+                    'hostname' => $this->host,
+                    'env' => $this->env,
+                    'probe' => $this->probe
+                ],
+                $additionalLabels
+            ),
             'results' => $results
         ]);
     }
