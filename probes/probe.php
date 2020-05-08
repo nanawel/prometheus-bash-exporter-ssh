@@ -37,7 +37,8 @@ class Probe
                 [
                     'hostname' => $this->host,
                     'env' => $this->env,
-                    'probe' => $this->probe
+                    'probe' => $this->probe,
+                    'probe_args' => '',
                 ],
                 $additionalLabels
             ),

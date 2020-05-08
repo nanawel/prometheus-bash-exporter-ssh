@@ -5,7 +5,7 @@ services:
   app:
     image: nanawel/bash-exporter:2.0.0-2
     restart: unless-stopped
-    command: "./bash-exporter -labels hostname,env,probe -interval ${PROBE_INTERVAL:-60}"
+    command: "./bash-exporter -labels hostname,env,probe,probe_args -interval ${PROBE_INTERVAL:-60}"
     ports:
       - '9300:9300'
     volumes:
