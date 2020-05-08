@@ -23,7 +23,7 @@ $results['connect_time'] = microtime(true) - $startTime;
 if (!empty($config['banner'])) {
     $startTime = microtime(true);
     $banner = socket_read($socket, 255);
-    $results['banner_read_time'] = strpos($banner, $config['banner']) === 0
+    $results['banner_read_time'] = strpos($banner, $config['banner']) !== false
         ? microtime(true) - $startTime
         : -1;
 }
