@@ -7,7 +7,7 @@ class MemInfo(Probe):
         memInfo = {}
         for l in rawMemInfo:
             label, value = l.split(':')
-            memInfo[label] = value.strip().split(' ')[0]
+            memInfo[label] = float(value.strip().split(' ')[0])
         self.sendResults(memInfo)
 
 MemInfo().run()

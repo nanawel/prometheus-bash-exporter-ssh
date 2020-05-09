@@ -21,7 +21,7 @@ tar -czOC "$tmpDir" script.py script.conf \
                    PROBE_ENV=${env} \
                    PROBE_NAME=${probe} \
                    tmp=\$(mktemp -d); \
-            tar -xzC \$tmp; python2 -B \$tmp/script.py < \$tmp/script.conf; rm -r \$tmp;'"
+            tar -xzC \$tmp; ${PYTHON_BIN:-python} -B \$tmp/script.py < \$tmp/script.conf; rm -r \$tmp;'"
 
 # Force exit 0 to prevent container from exiting in case probe experienced a temporary failure
 exit 0
