@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import fileinput
 import json
 import os

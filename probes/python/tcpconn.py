@@ -7,21 +7,21 @@ class TcpConn(Probe):
     def run(self):
         config = json.loads(self.getConfig())
         
-        startTime = time.perf_counter()
+        startTime = self.perfCounter()
         hostIp = socket.gethostbyname(config['host'])
-        results = {'resolve_time': time.perf_counter() - startTime}
+        results = {'resolve_time': self.perfCounter() - startTime}
 
         try:
-            startTime = time.perf_counter()
+            startTime = self.perfCounter()
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.connect((hostIp, config['port']))
-            results['connect_time'] = time.perf_counter() - startTime
+            results['connect_time'] = self.perfCounter() - startTime
 
             try:
                 if 'banner' in config:
-                    startTime = time.perf_counter()
+                    startTime = self.perfCounter()
                     banner = sock.recv(255).decode('utf-8')
-                    results['banner_read_time'] = time.perf_counter() - startTime
+                    results['banner_read_time'] = self.perfCounter() - startTime
                     if banner.find(config['banner']) == -1:
                         results['banner_read_time'] = -1
             except Exception as e:
@@ -35,5 +35,11 @@ class TcpConn(Probe):
     
         results.update({'probe_args': '{0}:{1}'.format(config['host'], config['port'])})
         self.sendResults(results)
+    
+    def perfCounter(self):
+        try:
+            return time.perf_counter()
+        except:
+            return time.clock()
 
 TcpConn().run()
