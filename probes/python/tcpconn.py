@@ -4,8 +4,12 @@ import socket
 import time
 
 class TcpConn(Probe):
+    DEFAULT_TIMEOUT=2.0
+
     def run(self):
         config = json.loads(self.getConfig())
+        if not 'timeout' in config:
+            config['timeout'] = self.DEFAULT_TIMEOUT
         
         startTime = self.perfCounter()
         hostIp = socket.gethostbyname(config['host'])
@@ -14,6 +18,7 @@ class TcpConn(Probe):
         try:
             startTime = self.perfCounter()
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(config['timeout'])
             sock.connect((hostIp, config['port']))
             results['connect_time'] = self.perfCounter() - startTime
 

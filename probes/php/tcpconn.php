@@ -1,6 +1,9 @@
 <?php
 
 class TcpConn extends Probe {
+    // TODO Implement support
+    const DEFAULT_TIMEOUT = 2.0;
+
     const METHOD_NATIVE = 'native';
     const METHOD_NETCAT = 'netcat';
 
