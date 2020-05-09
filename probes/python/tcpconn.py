@@ -33,8 +33,7 @@ class TcpConn(Probe):
             #print(e)
             results.update({'connect_time': -1, 'banner_read_time': -1})
     
-        results.update({'probe_args': '{0}:{1}'.format(config['host'], config['port'])})
-        self.sendResults(results)
+        self.sendResults(results, {'probe_args': '{0}:{1}'.format(config['host'], config['port'])})
     
     def perfCounter(self):
         try:
