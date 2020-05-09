@@ -6,13 +6,10 @@ class LoadAvg(Probe):
         load1, load5, load15 = os.getloadavg()
         
         # Compatibility implementation
-        with open('/proc/cpuinfo') as f:
-            rawCpuInfo = f.read()
-        rawCpuInfo = rawCpuInfo.splitlines()
+        rawCpuInfo = open('/proc/cpuinfo').read().splitlines()
 
         cpuCount = 0
         for line in rawCpuInfo:
-            print(line)
             if line.startswith("processor\t"):
                 cpuCount += 1
 

@@ -1,9 +1,7 @@
 
 class MemInfo(Probe):
     def run(self):
-        with open('/proc/meminfo') as f:
-            rawMemInfo = f.read()
-        rawMemInfo = rawMemInfo.splitlines()
+        rawMemInfo = open('/proc/meminfo').read().splitlines()
         memInfo = {}
         for l in rawMemInfo:
             label, value = l.split(':')
