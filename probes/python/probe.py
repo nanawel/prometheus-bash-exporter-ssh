@@ -1,9 +1,13 @@
 # coding: utf-8
 
 import fileinput
-import json
 import os
 import sys
+
+try:
+    import json
+except ImportError:
+    import simplejson as json 
 
 class Probe:
     def __init__(self): # Notre méthode constructeur
