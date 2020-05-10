@@ -14,6 +14,6 @@ class DiskFree(Probe):
             if values[0].startswith('/dev/'):
                 results[values[0]] = int(values[4].rstrip('%'))
         
-        self.sendResults(collections.OrderedDict(sorted(results.items(),key=lambda t: t[0])))
+        self.sendResults(results)
 
 DiskFree().run()
