@@ -33,7 +33,7 @@ class TcpConn extends Probe {
         $this->sendResults(
             $results + [
                 // Default values
-                'connect_time' => -1,
+                'connect_time' => 0,
             ],
             [
                 'probe_args' => sprintf('%s:%d', $config['host'], $config['port'])
@@ -58,7 +58,7 @@ class TcpConn extends Probe {
             $banner = socket_read($socket, 255);
             $results['banner_read_time'] = strpos($banner, $config['banner']) !== false
                 ? microtime(true) - $startTime
-                : -1;
+                : 0;
         }
         
         socket_close($socket);
@@ -78,7 +78,7 @@ class TcpConn extends Probe {
         
         if (!empty($config['banner'])) {
             // Not supported
-            $results['banner_read_time'] = -1;
+            $results['banner_read_time'] = 0;
         }
 
         return $results;

@@ -27,16 +27,16 @@ class TcpConn(Probe):
                     startTime = self.perfCounter()
                     banner = sock.recv(255).decode('utf-8')
                     results['banner_read_time'] = self.perfCounter() - startTime
-                    if banner.find(config['banner']) == -1:
-                        results['banner_read_time'] = -1
+                    if banner.find(config['banner']) == 0:
+                        results['banner_read_time'] = 0
             except Exception as e:
                 #print(e)
-                results.update({'banner_read_time': -1})
+                results.update({'banner_read_time': 0})
 
             sock.close()
         except Exception as e:
             #print(e)
-            results.update({'connect_time': -1, 'banner_read_time': -1})
+            results.update({'connect_time': 0, 'banner_read_time': 0})
     
         self.sendResults(results, {'probe_args': '{0}:{1}'.format(config['host'], config['port'])})
     
