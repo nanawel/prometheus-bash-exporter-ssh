@@ -36,7 +36,7 @@ class SshConn(Probe):
                 time.sleep(0.01)
 
             if p.returncode != 0:
-                raise Exception('Unexpected return code: ' + p.returncode)
+                raise Exception('Unexpected return code: ' + str(p.returncode))
             
             results['connect_time'] = self.perfCounter() - startTime
         except Exception as e:
