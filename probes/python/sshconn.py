@@ -20,11 +20,13 @@ class SshConn(Probe):
             startTime = self.perfCounter()
 
             devNull = open('/dev/null')
+            host = '{0}@{1}'.format(config['user'], config['host']) if 'user' in config else config['host']
 
             cmd = ['ssh']
             cmd.append('-tt')
             cmd.extend(config['options'])
-            cmd.extend(['{0}@{1}'.format(config['user'], config['host']), '-p', str(config['port'])])
+            cmd.append(host)
+            cmd.extend(['-p', str(config['port'])])
             
             p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=devNull, stderr=devNull)
             p.communicate(input=b"exit\n", timeout=config['timeout'])
@@ -36,7 +38,7 @@ class SshConn(Probe):
             #print('ERROR: ', e)
             results.update({'connect_time': 0})
     
-        self.sendResults(results, {'probe_args': '{0}@{1}:{2}'.format(config['user'], config['host'], config['port'])})
+        self.sendResults(results, {'probe_args': '{0}:{1}'.format(host, config['port'])})
     
     def perfCounter(self):
         try:
