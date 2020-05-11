@@ -27,9 +27,14 @@ class SshConn(Probe):
             cmd.extend(config['options'])
             cmd.append(host)
             cmd.extend(['-p', str(config['port'])])
+            cmd.append('exit')
             
             p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=devNull, stderr=devNull)
-            p.communicate(input=b"exit\n", timeout=config['timeout'])
+            
+            # Python 2.7 compatible timeout  implementation
+            while p.poll() is None and (self.perfCounter() - startTime < config['timeout']):
+                time.sleep(0.01)
+
             if p.returncode != 0:
                 raise Exception('Unexpected return code: ' + p.returncode)
             
