@@ -1,5 +1,7 @@
 .env
 conf/*.conf
+!conf/*.sample.conf
 conf/*.env
+!conf/*.sample.env
 scripts/*.sh
 tmp/

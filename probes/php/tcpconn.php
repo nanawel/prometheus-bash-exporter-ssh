@@ -31,10 +31,10 @@ class TcpConn extends Probe {
         }
 
         $this->sendResults(
-            $results + [
+            $results + array(
                 // Default values
                 'connect_time' => 0,
-            ],
+            ),
             [
                 'probe_args' => sprintf('%s:%d', $config['host'], $config['port'])
             ]
