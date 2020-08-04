@@ -16,7 +16,8 @@ tar -czOC "$tmpDir" script.php script.conf \
         -o LogLevel=ERROR \
         -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECKING:-no} \
         -o ConnectTimeout=${SSH_CONNECT_TIMEOUT:-5} \
-        ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22} "sh -c '\
+        ${SSH_USER}@${SSH_HOST} -p${SSH_PORT:-22}${SSH_ARGS} "sh -c '\
+            ${AFTER_CONNECT_SCRIPT} \
             export PROBE_HOSTNAME=${SSH_HOST} \
                    PROBE_ENV=${env} \
                    PROBE_NAME=${probe} \

@@ -1,7 +1,7 @@
 <?php
 
 function extractMeminfo(array $meminfo) {
-    $results = [];
+    $results = array();
     foreach($meminfo as $line) {
         if (!$line) {
             continue;
@@ -13,6 +13,7 @@ function extractMeminfo(array $meminfo) {
     return $results;
 }
 
-(new Probe())->sendResults(
+$probe = new Probe();
+$probe->sendResults(
     extractMeminfo(explode("\n", file_get_contents('/proc/meminfo')))
 );

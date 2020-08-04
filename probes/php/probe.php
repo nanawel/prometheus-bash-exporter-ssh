@@ -31,19 +31,19 @@ class Probe
         return file_get_contents('php://stdin') ?: '';
     }
 
-    public function sendResults($results, array $additionalLabels = []) {
-        echo json_encode([
+    public function sendResults($results, array $additionalLabels = array()) {
+        echo json_encode(array(
             'labels' => array_merge(
-                [
+                array(
                     'hostname' => $this->host,
                     'env' => $this->env,
                     'probe' => $this->probe,
                     'probe_args' => '',
-                ],
+                ),
                 $additionalLabels
             ),
             'results' => $results
-        ]);
+        ));
     }
 }
 ?>

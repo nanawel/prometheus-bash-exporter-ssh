@@ -11,7 +11,7 @@ class TcpConn extends Probe {
     {
         $config = json_decode($this->getConfig(), true);
         
-        $results = [];
+        $results = array();
         
         $startTime = microtime(true);
         $hostIp = filter_var($config['host'], FILTER_VALIDATE_IP)
@@ -42,7 +42,7 @@ class TcpConn extends Probe {
     }
 
     protected function runNative($config, $hostIp) {
-        $results = [];
+        $results = array();
         
         if (false === ($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP))) {
             exit(1);
@@ -67,7 +67,7 @@ class TcpConn extends Probe {
     }
 
     protected function runNetcat($config, $hostIp) {
-        $results = [];
+        $results = array();
 
         $startTime = microtime(true);
         $out = system(sprintf('nc -n -z %s %d', $hostIp, $config['port']), $rc);
@@ -85,4 +85,5 @@ class TcpConn extends Probe {
     }
 }
 
-(new TcpConn())->run();
+$probe = new TcpConn();
+$probe->run();

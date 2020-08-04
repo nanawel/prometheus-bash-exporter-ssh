@@ -13,9 +13,10 @@ usort($df, function($a, $b) {
     return strcmp($a[0], $b[0]);
 });
 
-$results = [];
+$results = array();
 foreach ($df as $line) {
     $results[$line[0]] = (int) $line[4];
 }
 
-(new Probe())->sendResults($results);
+$probe = new Probe();
+$probe->sendResults($results);
